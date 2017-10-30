@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import vn.colorme.spring5recipeapp.converter.RecipeCommandToRecipe;
+import vn.colorme.spring5recipeapp.converter.RecipeToRecipeCommand;
 import vn.colorme.spring5recipeapp.domain.Recipe;
 import vn.colorme.spring5recipeapp.repositories.RecipeRepository;
 
@@ -24,10 +26,16 @@ public class RecipeServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test
@@ -41,8 +49,8 @@ public class RecipeServiceImplTest {
         Recipe recipeReturned = recipeService.getRecipeById(1L);
 
         Assert.assertNotNull(recipeReturned);
-        verify(recipeRepository,times(1)).findById(anyLong());
-        verify(recipeRepository,never()).findAll();
+        verify(recipeRepository, times(1)).findById(anyLong());
+        verify(recipeRepository, never()).findAll();
     }
 
     @Test
