@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Show Recipe</title>
+    <title>Recipe Home</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -83,8 +83,14 @@
                     </div>
                 </div>
                 <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h1 class="panel-title">Ingredients</h1>
+                    <div class="panel-heading" style="overflow: hidden;">
+                        <h1 class="panel-title" style="float: left">
+                            Ingredients
+                        </h1>
+                        <a style="float:right"
+                           class="btn btn-default" href=""
+                           th:href="@{'/recipe/'+ ${recipe.id} + '/ingredients'}">Detail</a>
+
                     </div>
                     <div class="panel-body">
                         <div class="row">
