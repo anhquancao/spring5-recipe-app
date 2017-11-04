@@ -24,8 +24,11 @@
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-primary">
 
-                <div class="panel-heading">
-                    <h1 class="panel-title">Ingredients</h1>
+                <div class="panel-heading" style="overflow: hidden">
+                    <h1 class="panel-title" style="float: left">Ingredients</h1>
+                    <a href="#" class="btn btn-default"
+                       style="float: right"
+                       th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/new'}">Add</a>
                 </div>
                 <div class="panel-body">
 

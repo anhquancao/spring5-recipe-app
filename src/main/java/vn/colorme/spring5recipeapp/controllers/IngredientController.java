@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.colorme.spring5recipeapp.commands.IngredientCommand;
+import vn.colorme.spring5recipeapp.commands.RecipeCommand;
+import vn.colorme.spring5recipeapp.commands.UnitOfMeasureCommand;
 import vn.colorme.spring5recipeapp.services.IngredientService;
 import vn.colorme.spring5recipeapp.services.RecipeService;
 import vn.colorme.spring5recipeapp.services.UnitOfMeasureService;
@@ -69,6 +71,26 @@ public class IngredientController {
         log.debug("saved ingredient id:" + savedCommand.getId());
 
         return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+    }
+
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/new")
+    public String newIngredient(@PathVariable String recipeId, Model model) {
+        RecipeCommand recipeCommand = recipeService.findRecipeCommandById(Long.valueOf(recipeId));
+
+        if (recipeCommand == null) {
+            throw new RuntimeException("Recipe is not existed");
+        }
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(recipeCommand.getId());
+
+        model.addAttribute("ingredient", ingredientCommand);
+
+        ingredientCommand.setUnitOfMeasure(new UnitOfMeasureCommand());
+
+        model.addAttribute("uomList", unitOfMeasureService.listAllCommands());
+
+        return "recipe/ingredient/ingredientform";
     }
 
 }
