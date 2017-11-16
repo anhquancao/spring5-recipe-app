@@ -12,7 +12,7 @@ import vn.colorme.spring5recipeapp.domain.Recipe;
  * Created by jt on 6/21/17.
  */
 @Component
-public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand>{
+public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
 
     private final CategoryToCategoryCommand categoryConveter;
     private final IngredientToIngredientCommand ingredientConverter;
@@ -44,13 +44,14 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand>{
         command.setSource(source.getSource());
         command.setUrl(source.getUrl());
         command.setNotes(notesConverter.convert(source.getNotes()));
+        command.setImage(source.getImage());
 
-        if (source.getCategories() != null && source.getCategories().size() > 0){
+        if (source.getCategories() != null && source.getCategories().size() > 0) {
             source.getCategories()
                     .forEach((Category category) -> command.getCategories().add(categoryConveter.convert(category)));
         }
 
-        if (source.getIngredients() != null && source.getIngredients().size() > 0){
+        if (source.getIngredients() != null && source.getIngredients().size() > 0) {
             source.getIngredients()
                     .forEach(ingredient -> command.getIngredients().add(ingredientConverter.convert(ingredient)));
         }
