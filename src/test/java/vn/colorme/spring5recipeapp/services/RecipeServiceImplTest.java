@@ -9,6 +9,7 @@ import org.mockito.MockitoAnnotations;
 import vn.colorme.spring5recipeapp.converter.RecipeCommandToRecipe;
 import vn.colorme.spring5recipeapp.converter.RecipeToRecipeCommand;
 import vn.colorme.spring5recipeapp.domain.Recipe;
+import vn.colorme.spring5recipeapp.exceptions.NotFoundException;
 import vn.colorme.spring5recipeapp.repositories.RecipeRepository;
 
 import java.util.HashSet;
@@ -51,6 +52,18 @@ public class RecipeServiceImplTest {
         Assert.assertNotNull(recipeReturned);
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, never()).findAll();
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void getRecipeByIdTestNotFound() throws Exception {
+
+        Optional<Recipe> recipeOptional = Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        Recipe recipeReturned = recipeService.getRecipeById(1L);
+
+        //should go boom
     }
 
     @Test

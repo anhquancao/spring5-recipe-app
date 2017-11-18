@@ -23,7 +23,9 @@
         <div class="col-md-6 col-md-offset-3">
             <!--/*@thymesVar id="ingredient" type="vn.colorme.spring5recipeapp.commands.IngredientCommand"*/-->
             <!--@thymesVar id="uomEach" type="vn.colorme.spring5recipeapp.commands.UnitOfMeasureCommand" -->
-            <form  th:object="${ingredient}" th:action="@{'/recipe/' + ${ingredient.getRecipeId()} + '/ingredient'} ">
+            <form th:object="${ingredient}"
+                  method="post"
+                  th:action="@{'/recipe/' + ${ingredient.getRecipeId()} + '/ingredient'} ">
                 <input type="hidden" th:field="*{id}"/>
                 <div class="pannel-group">
                     <div class="panel panel-primary">
@@ -50,7 +52,8 @@
                                         <option th:each="uomEach : ${uomList}"
                                                 th:value="${uomEach.id}"
                                                 th:selected="${uomEach.id.equals(ingredient.unitOfMeasure.id)}"
-                                                th:text="${uomEach.description}">Each</option>
+                                                th:text="${uomEach.description}">Each
+                                        </option>
                                     </select>
                                 </div>
                             </div>

@@ -7,6 +7,7 @@ import vn.colorme.spring5recipeapp.commands.RecipeCommand;
 import vn.colorme.spring5recipeapp.converter.RecipeCommandToRecipe;
 import vn.colorme.spring5recipeapp.converter.RecipeToRecipeCommand;
 import vn.colorme.spring5recipeapp.domain.Recipe;
+import vn.colorme.spring5recipeapp.exceptions.NotFoundException;
 import vn.colorme.spring5recipeapp.repositories.RecipeRepository;
 
 import java.util.HashSet;
@@ -44,7 +45,8 @@ public class RecipeServiceImpl implements RecipeService {
         Optional<Recipe> recipeOptional = recipeRepository.findById(id);
 
         if (!recipeOptional.isPresent()) {
-            throw new RuntimeException("Recipe not found!");
+//            throw new RuntimeException("Recipe not found!");
+            throw new NotFoundException("Recipe not found!");
         }
         return recipeOptional.get();
     }
