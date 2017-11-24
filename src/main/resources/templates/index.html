@@ -1,27 +1,155 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Recipe Home</title>
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
-          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
-
-    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
-
+<head th:replace="fragments/header :: header">
 </head>
-<body>
+<body class="template-page">
 <!--@thymesVar id="recipes" type="java.util.List" -->
 <!--@thymesVar id="recipe" type="vn.colorme.spring5recipeapp.domain.Recipe"-->
 <div th:replace="fragments/navbar :: navbar">
+</div>
+<div class="section section-header-blog">
+    <div class="parallax filter filter-color-black">
+        <div class="image" style="background-image:url('../assets/img/header-10.jpeg')">
+        </div>
+        <div class="container">
+            <div class="content">
+                <div class="title-area">
+                    <h1>Creative Blog</h1>
+                    <h3>Find only the best stories from our famous writers.</h3>
+                    <button type="button" class="btn btn-white btn-fill">Discover Stories</button>
+                </div>
+            </div>
 
+        </div>
+    </div>
+
+</div>
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"th:each="recipe : ${recipes}">
+                <div class="card card-blog card-plain">
+                    <a href="#gaia" class="header">
+                        <img src="../assets/img/header-3.jpeg" class="image-header">
+                    </a>
+                    <div class="content">
+                        <h6 class="card-date">Jul 27</h6>
+                        <a href="#gaia" class="card-title">
+                            <h3 th:text="${recipe.description}">How to Make the Perfect Statues</h3>
+                        </a>
+                        <div class="line-divider line-danger"></div>
+                        <h6 class="card-category">Food &amp; Drink</h6>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="section section-card-blog">
+    <div class="container">
+        <div class="title-area">
+            <h5 class="text-gray">Don't miss our</h5>
+            <h2>Most Recommended Stories</h2>
+            <div class="separator separator-danger">✻</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-blog">
+                    <a href="blog-posts.html" class="header">
+                        <img src="../assets/img/header-7.jpeg" class="image-header">
+                    </a>
+                    <div class="content">
+                        <div class="circle-black">
+                            <div class="circle">
+                                <div class="date-wrapper">
+                                    <span class="month">Apr</span>
+                                    <span class="date">12</span>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="blog-posts.html" class="card-title"><h3>We Are Here to Make Life Better</h3></a>
+                        <h6 class="card-category text-warning">Life Tips &amp; Tricks</h6>
+                        <p class="text-description text-gray">Royère doesn't make a Polar bear bed but the Polar bear couch is my favorite piece of furniture we own The Pablo pop up was almost a pop up of influence.</p>
+                    </div>
+                </div>
+
+                <div class="card card-blog">
+                    <div class="content">
+                        <div class="circle-black">
+                            <div class="circle">
+                                <div class="date-wrapper">
+                                    <span class="month">Aug</span>
+                                    <span class="date">30</span>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="blog-posts.html" class="card-title"><h3>Don't Be Scared</h3></a>
+                        <h6 class="card-category text-info">Motivation</h6>
+                        <p class="text-description text-gray">Nothing beats the slight tang and softness of a ciabatta. Here's mmy recipe.Simply dip in some olive oil and balsamic vinegar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-blog">
+                    <a href="blog-posts.html" class="header">
+                        <img src="../assets/img/header-8.jpeg" class="image-header">
+                    </a>
+                    <div class="content">
+                        <div class="circle-black">
+                            <div class="circle">
+                                <div class="date-wrapper">
+                                    <span class="month">Mar</span>
+                                    <span class="date">10</span>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="blog-posts.html" class="card-title"><h3>Now There Is Only One Important Color...</h3></a>
+                        <h6 class="card-category text-danger">Trending</h6>
+                        <p class="text-description text-gray">When it comes to choosing decorative pieces, you want to stick to a maximum of three colors. Then it's all about placement.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-blog">
+                    <div class="content">
+                        <div class="circle-black">
+                            <div class="circle">
+                                <div class="date-wrapper">
+                                    <span class="month">Feb</span>
+                                    <span class="date">11</span>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="blog-posts.html" class="card-title"><h3>We No Longer Have to Be Scared of the Truth</h3></a>
+                        <h6 class="card-category text-info">Motivation</h6>
+                        <p class="text-description text-gray">Nothing beats the slight tang and softness of a ciabatta. Here's mmy recipe.Simply dip in some olive oil and balsamic vinegar.</p>
+                    </div>
+                </div>
+                <div class="card card-blog">
+                    <a href="blog-posts.html" class="header">
+                        <img src="../assets/img/header-1.jpeg" class="image-header">
+                    </a>
+                    <div class="content">
+                        <div class="circle-black">
+                            <div class="circle">
+                                <div class="date-wrapper">
+                                    <span class="month">Mar</span>
+                                    <span class="date">10</span>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="blog-posts.html" class="card-title"><h3>Now There Is Only One Important Color...</h3></a>
+                        <h6 class="card-category text-danger">Trending</h6>
+                        <p class="text-description text-gray">When it comes to choosing decorative pieces, you want to stick to a maximum of three colors. Then it's all about placement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
@@ -57,6 +185,8 @@
             </div>
         </div>
     </div>
+</div>
+<div th:replace="fragments/footer :: footer">
 </div>
 </body>
 </html>
