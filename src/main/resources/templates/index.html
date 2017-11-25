@@ -27,10 +27,11 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-md-4"th:each="recipe : ${recipes}">
+            <div class="col-md-4" th:each="recipe : ${recipes}">
                 <div class="card card-blog card-plain">
                     <a href="#gaia" class="header">
-                        <img src="../assets/img/header-3.jpeg" class="image-header">
+                        <img th:src="@{${(recipe.image != null && recipe.image.length > 0) ? '/recipe/' + recipe.id+'/recipeimage':'/images/upload-empty.png'}}"
+                             class="image-header">
                     </a>
                     <div class="content">
                         <h6 class="card-date">Jul 27</h6>
@@ -71,7 +72,9 @@
                         </div>
                         <a href="blog-posts.html" class="card-title"><h3>We Are Here to Make Life Better</h3></a>
                         <h6 class="card-category text-warning">Life Tips &amp; Tricks</h6>
-                        <p class="text-description text-gray">Royère doesn't make a Polar bear bed but the Polar bear couch is my favorite piece of furniture we own The Pablo pop up was almost a pop up of influence.</p>
+                        <p class="text-description text-gray">Royère doesn't make a Polar bear bed but the Polar bear
+                            couch is my favorite piece of furniture we own The Pablo pop up was almost a pop up of
+                            influence.</p>
                     </div>
                 </div>
 
@@ -87,7 +90,8 @@
                         </div>
                         <a href="blog-posts.html" class="card-title"><h3>Don't Be Scared</h3></a>
                         <h6 class="card-category text-info">Motivation</h6>
-                        <p class="text-description text-gray">Nothing beats the slight tang and softness of a ciabatta. Here's mmy recipe.Simply dip in some olive oil and balsamic vinegar.</p>
+                        <p class="text-description text-gray">Nothing beats the slight tang and softness of a ciabatta.
+                            Here's mmy recipe.Simply dip in some olive oil and balsamic vinegar.</p>
                     </div>
                 </div>
             </div>
@@ -106,9 +110,11 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="blog-posts.html" class="card-title"><h3>Now There Is Only One Important Color...</h3></a>
+                        <a href="blog-posts.html" class="card-title"><h3>Now There Is Only One Important Color...</h3>
+                        </a>
                         <h6 class="card-category text-danger">Trending</h6>
-                        <p class="text-description text-gray">When it comes to choosing decorative pieces, you want to stick to a maximum of three colors. Then it's all about placement.</p>
+                        <p class="text-description text-gray">When it comes to choosing decorative pieces, you want to
+                            stick to a maximum of three colors. Then it's all about placement.</p>
                     </div>
                 </div>
             </div>
@@ -124,9 +130,11 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="blog-posts.html" class="card-title"><h3>We No Longer Have to Be Scared of the Truth</h3></a>
+                        <a href="blog-posts.html" class="card-title"><h3>We No Longer Have to Be Scared of the
+                            Truth</h3></a>
                         <h6 class="card-category text-info">Motivation</h6>
-                        <p class="text-description text-gray">Nothing beats the slight tang and softness of a ciabatta. Here's mmy recipe.Simply dip in some olive oil and balsamic vinegar.</p>
+                        <p class="text-description text-gray">Nothing beats the slight tang and softness of a ciabatta.
+                            Here's mmy recipe.Simply dip in some olive oil and balsamic vinegar.</p>
                     </div>
                 </div>
                 <div class="card card-blog">
@@ -142,9 +150,11 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="blog-posts.html" class="card-title"><h3>Now There Is Only One Important Color...</h3></a>
+                        <a href="blog-posts.html" class="card-title"><h3>Now There Is Only One Important Color...</h3>
+                        </a>
                         <h6 class="card-category text-danger">Trending</h6>
-                        <p class="text-description text-gray">When it comes to choosing decorative pieces, you want to stick to a maximum of three colors. Then it's all about placement.</p>
+                        <p class="text-description text-gray">When it comes to choosing decorative pieces, you want to
+                            stick to a maximum of three colors. Then it's all about placement.</p>
                     </div>
                 </div>
             </div>
