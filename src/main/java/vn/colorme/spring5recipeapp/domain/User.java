@@ -1,4 +1,4 @@
-package vn.colorme.spring5recipeapp.commands;
+package vn.colorme.spring5recipeapp.domain;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -12,7 +12,7 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private int id;
 

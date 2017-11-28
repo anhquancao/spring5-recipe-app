@@ -2,7 +2,8 @@ package vn.colorme.spring5recipeapp.services;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import vn.colorme.spring5recipeapp.commands.Role;
+import vn.colorme.spring5recipeapp.domain.Role;
+import vn.colorme.spring5recipeapp.domain.User;
 import vn.colorme.spring5recipeapp.repositories.RoleRepository;
 import vn.colorme.spring5recipeapp.repositories.UserRepository;
 
@@ -28,12 +29,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public vn.colorme.spring5recipeapp.commands.User findUserByEmail(String email) {
+    public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
     @Override
-    public void saveUser(vn.colorme.spring5recipeapp.commands.User user) {
+    public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         Role userRole = roleRepository.findByRole("ADMIN");
