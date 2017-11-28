@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+</head>
+<body class="template-page">
+<!--@thymesVar id="recipes" type="java.util.List" -->
+<!--@thymesVar id="recipe" type="vn.colorme.spring5recipeapp.domain.Recipe"-->
+<div th:replace="fragments/navbar :: navbar">
+</div>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>403 - Access is denied</h1>
+        <div th:inline="text">Hello '[[${#httpServletRequest.remoteUser}]]',
+            you do not have permission to access this page.</div>
+    </div>
+
+</div>
+<div th:replace="fragments/footer :: footer">
+</div>
+</body>
+</html>
