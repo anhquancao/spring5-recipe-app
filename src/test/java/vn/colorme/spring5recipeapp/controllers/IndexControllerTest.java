@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import vn.colorme.spring5recipeapp.domain.Recipe;
 import vn.colorme.spring5recipeapp.services.RecipeService;
+import vn.colorme.spring5recipeapp.services.UserService;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +22,9 @@ import java.util.Set;
 public class IndexControllerTest {
 
     IndexController indexController;
+
+    @Mock
+    UserService userService;
 
     @Mock
     RecipeService recipeService;
@@ -31,11 +35,11 @@ public class IndexControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        indexController = new IndexController(recipeService);
+        indexController = new IndexController(recipeService, userService);
     }
 
     @Test
-    public void testMockMVC() throws Exception{
+    public void testMockMVC() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
         mockMvc.perform(MockMvcRequestBuilders.get("/"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
