@@ -23,11 +23,19 @@
                     <a href="/login"
                        class="btn btn-danger btn-fill">Log in</a>
                 </li>
-                <li th:if="${user != null}">
-                    <a href="/" th:text="${'Welcome, ' + user.lastName + ' ' + user.name}">
+                <li class="dropdown" th:if="${user != null}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        <span th:text="${user.lastName + ' ' + user.name}"></span> <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu dropdown-danger">
+                        <li>
+                            <a href="/logout">Log out</a>
+                        </li>
 
-                    </a>
+                    </ul>
                 </li>
+
             </ul>
         </div>
         <!-- /.navbar-collapse -->
