@@ -4,12 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import vn.colorme.spring5recipeapp.domain.*;
 import vn.colorme.spring5recipeapp.repositories.CategoryRepository;
 import vn.colorme.spring5recipeapp.repositories.RecipeRepository;
 import vn.colorme.spring5recipeapp.repositories.UnitOfMeasureRepository;
+import vn.colorme.spring5recipeapp.repositories.UserRepository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -22,16 +24,28 @@ import java.util.Optional;
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private RecipeRepository recipeRepository;
+    private UserRepository userRepository;
     private UnitOfMeasureRepository unitOfMeasureRepository;
     private CategoryRepository categoryRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public RecipeBootstrap(RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository, CategoryRepository categoryRepository) {
+    public RecipeBootstrap(RecipeRepository recipeRepository, UserRepository userRepository, UnitOfMeasureRepository unitOfMeasureRepository, CategoryRepository categoryRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.recipeRepository = recipeRepository;
+        this.userRepository = userRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
         this.categoryRepository = categoryRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public List<Recipe> getRecipes() {
+        User user = new User();
+        user.setActive(1);
+        user.setEmail("test@test.com");
+        user.setLastName("Test");
+        user.setName("Admin");
+        user.setPassword(bCryptPasswordEncoder.encode("123456"));
+        userRepository.save(user);
+
         List<Recipe> recipes = new ArrayList<>(2);
 
         //get UOMs
@@ -96,6 +110,10 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         Category mexicanCategory = mexicanCategoryOptional.get();
 
         Recipe guacRecipe = new Recipe();
+
+        guacRecipe.setUser(user);
+//        user.getRecipes().add(guacRecipe);
+
         guacRecipe.setDescription("Perfect Guacamole");
         guacRecipe.setPrepTime(10);
         guacRecipe.setCookTime(0);
@@ -199,8 +217,11 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         tacosRecipe.getCategories().add(americanCategory);
         tacosRecipe.getCategories().add(mexicanCategory);
+        tacosRecipe.setUser(user);
+//        user.getRecipes().add(tacosRecipe);
 
         recipes.add(tacosRecipe);
+
 
         return recipes;
     }

@@ -16,7 +16,8 @@ import vn.colorme.spring5recipeapp.domain.Recipe;
 import vn.colorme.spring5recipeapp.services.RecipeService;
 import vn.colorme.spring5recipeapp.services.UserService;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class IndexControllerTest {
@@ -50,7 +51,7 @@ public class IndexControllerTest {
     public void index() throws Exception {
 
         // given
-        Set<Recipe> recipes = new HashSet<>();
+        List<Recipe> recipes = new ArrayList<>();
         Recipe recipe = new Recipe();
         recipe.setId(1L);
         recipes.add(recipe);

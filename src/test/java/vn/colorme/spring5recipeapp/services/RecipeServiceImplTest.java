@@ -12,9 +12,7 @@ import vn.colorme.spring5recipeapp.domain.Recipe;
 import vn.colorme.spring5recipeapp.exceptions.NotFoundException;
 import vn.colorme.spring5recipeapp.repositories.RecipeRepository;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -70,12 +68,12 @@ public class RecipeServiceImplTest {
     public void getRecipes() throws Exception {
 
         Recipe recipe = new Recipe();
-        HashSet recipeData = new HashSet();
+        List<Recipe> recipeData = new ArrayList<>();
         recipeData.add(recipe);
 
         when(recipeService.getRecipes()).thenReturn(recipeData);
 
-        Set<Recipe> recipes = recipeService.getRecipes();
+        List<Recipe> recipes = recipeService.getRecipes();
 
         Assert.assertEquals(recipes.size(), 1);
 

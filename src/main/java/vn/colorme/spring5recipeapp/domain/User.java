@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,7 +16,6 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
     private Long id;
 
     @Column(name = "email")
@@ -39,8 +39,8 @@ public class User {
     @Column(name = "active")
     private int active;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<Recipe> recipes;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Recipe> recipes = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))

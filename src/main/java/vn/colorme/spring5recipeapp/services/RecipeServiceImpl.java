@@ -10,9 +10,7 @@ import vn.colorme.spring5recipeapp.domain.Recipe;
 import vn.colorme.spring5recipeapp.exceptions.NotFoundException;
 import vn.colorme.spring5recipeapp.repositories.RecipeRepository;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -33,8 +31,8 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Set<Recipe> getRecipes() {
-        Set<Recipe> recipes = new HashSet<>();
+    public List<Recipe> getRecipes() {
+        List<Recipe> recipes = new ArrayList<>();
 //        recipeRepository.findAll().iterator().forEachRemaining(recipe -> recipes.add(recipe));
         recipeRepository.findAll().iterator().forEachRemaining(recipes::add);
         return recipes;
