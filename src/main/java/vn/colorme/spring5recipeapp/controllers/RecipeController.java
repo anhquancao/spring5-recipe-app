@@ -1,15 +1,20 @@
 package vn.colorme.spring5recipeapp.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import vn.colorme.spring5recipeapp.commands.RecipeCommand;
+import vn.colorme.spring5recipeapp.domain.User;
 import vn.colorme.spring5recipeapp.exceptions.NotFoundException;
 import vn.colorme.spring5recipeapp.services.RecipeService;
+import vn.colorme.spring5recipeapp.services.UserService;
 
 import javax.validation.Valid;
 
@@ -18,6 +23,9 @@ import javax.validation.Valid;
 public class RecipeController {
 
     private RecipeService recipeService;
+
+    @Autowired
+    private UserService userService;
 
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
@@ -50,7 +58,10 @@ public class RecipeController {
             });
             return "recipe/recipeform";
         }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
+        User user = userService.findUserByEmail(auth.getName());
+        command.setUserId(user.getId());
         RecipeCommand savedRecipeCommand = recipeService.saveRecipeCommand(command);
         return "redirect:/recipe/" + savedRecipeCommand.getId() + "/show";
     }

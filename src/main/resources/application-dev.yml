@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:33060/sfg_dev?autoReconnect=true&useSSL=false
-    username: sfg_dev_user
-    password: 123
+    username: homestead
+    password: secret
   jpa:
     hibernate:
       ddl-auto: validate

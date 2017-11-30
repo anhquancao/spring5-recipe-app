@@ -36,6 +36,8 @@ public class RecipeCommand {
     private Integer servings;
 
     private String source;
+    
+    private Long userId;
 
     @URL
     private String url;

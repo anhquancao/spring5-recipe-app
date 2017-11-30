@@ -5,64 +5,74 @@
 <body class="template-page">
 <!--@thymesVar id="recipes" type="java.util.List" -->
 <!--@thymesVar id="recipe" type="vn.colorme.spring5recipeapp.domain.Recipe"-->
-<div th:replace="fragments/navbar :: navbar">
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+<div class="section section-white section-signup">
+    <div class="static-image">
+        <div class="image" style="background-image: url('/assets/img/header-4.jpeg')">
+        </div>
+        <div class="container">
             <form autocomplete="off" action="#" th:action="@{/register}"
                   th:object="${user}" method="post" class="form-horizontal"
                   role="form">
-                <h2>Registration Form</h2>
-                <div class="form-group">
-                    <div class="col-sm-9">
-                        <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-                               class="validation-message"></label>
-                        <input type="text" th:field="*{name}" placeholder="Name"
-                               class="form-control"/>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4 text-center">
+                        <h2 class="text-white">Sign up</h2>
+
+                        <div class="separator separator-danger">✻</div>
+
+                        <div class="form-group">
+                            <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                   class="validation-message"></label>
+                            <input type="text" th:field="*{name}" placeholder="Name"
+                                   class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                                   class="validation-message"></label>
+                            <input type="text" th:field="*{lastName}"
+                                   placeholder="Last Name" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" th:field="*{email}" placeholder="Email"
+                                   class="form-control"/> <label
+                                th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                                class="validation-message"></label>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" th:field="*{password}"
+                                   placeholder="Password" class="form-control"/> <label
+                                th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                                class="validation-message"></label>
+                        </div>
+                        <p>
+                            By signing up you agree to
+                            <a href="signup.html">
+                                <span class="text-danger">
+                                    Terms of Service
+                                </span>
+                            </a> and
+                            <a href="signup.html">
+                                <span class="text-danger">
+                                    Privacy Policy
+                                </span>
+                            </a>
+                        </p>
+                        <p th:utext="${successMessage}"></p>
+                        <div class="button-signin">
+                            <button class="btn btn-danger btn-round btn-fill btn-wd">
+                                Sign Up
+                            </button>
+                        </div>
+
+                        <p>
+                            Or use an existing <a href="/login" class="text-danger">account</a>.
+                        </p>
+
+
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="col-sm-9">
-                        <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
-                               class="validation-message"></label>
-                        <input type="text" th:field="*{lastName}"
-                               placeholder="Last Name" class="form-control"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-9">
-                        <input type="text" th:field="*{email}" placeholder="Email"
-                               class="form-control"/> <label
-                            th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                            class="validation-message"></label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-9">
-                        <input type="password" th:field="*{password}"
-                               placeholder="Password" class="form-control"/> <label
-                            th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-                            class="validation-message"></label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-9">
-                        <button type="submit" class="btn btn-primary btn-block">Register User</button>
-                    </div>
-                </div>
-
-                <span th:utext="${successMessage}"></span>
-
-
             </form>
         </div>
     </div>
-</div>
-
-<div th:replace="fragments/footer :: footer">
 </div>
 </body>
 </html>

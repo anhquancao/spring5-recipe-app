@@ -26,8 +26,6 @@ public class IndexController {
     @GetMapping({"", "/", "/index"})
     public String index(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        log.debug("credential", auth.getCredentials());
-        log.debug("name", auth.getName());
         User user = userService.findUserByEmail(auth.getName());
         model.addAttribute("recipes", recipeService.getRecipes());
         model.addAttribute("user", user);

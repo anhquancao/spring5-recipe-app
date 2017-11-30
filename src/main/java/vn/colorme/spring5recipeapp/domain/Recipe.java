@@ -42,8 +42,12 @@ public class Recipe {
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public void setNotes(Notes notes) {
-        if (notes != null){
+        if (notes != null) {
             this.notes = notes;
             notes.setRecipe(this);
         }

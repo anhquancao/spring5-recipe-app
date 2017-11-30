@@ -6,32 +6,6 @@
 <!--@thymesVar id="recipes" type="java.util.List" -->
 <!--@thymesVar id="recipe" type="vn.colorme.spring5recipeapp.domain.Recipe"-->
 <div class="section section-signin">
-
-    <div class="image-container">
-        <div class="filter filter-color-black" style="background-image: url('../assets/img/header-9.jpeg')">
-            <div class="col-md-8 col-md-offset-1">
-                <div class="content">
-                    <div class="title-area">
-                        <h1 class="title-modern">Gaia</h1>
-                        <h3>Premium Bootstrap Template</h3>
-                    </div>
-
-                    <h5 class="subtitle">First Feature</h5>
-                    <p>Ultralight Prayer: Happy Easter! In Roman times the artist would contemplate proportions and
-                        colors. Now there is only one important color...
-                    </p>
-                    <h5 class="subtitle">Second Feature</h5>
-                    <p>We no longer have to be scared of the truth I promise I will never let the people down. I want a
-                        better life for all!
-                    </p>
-                    <h5 class="subtitle">Third Feature</h5>
-                    <p>WI have a dream. That dreams will actualize. Dreams will manifest. When companies doubt me they
-                        doubt us.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="form-container">
         <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 text-center">
             <form th:action="@{/login}" method="post">
@@ -71,14 +45,12 @@
                     <button class="btn btn-danger btn-round btn-fill btn-wd">
                         Sign In
                     </button>
-                    <p class="text-gray info">Don't have an account? <a href="signup.html">Sign up</a></p>
+                    <p class="text-gray info">Don't have an account? <a href="/register">Sign up</a></p>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-
 
 
 </body>

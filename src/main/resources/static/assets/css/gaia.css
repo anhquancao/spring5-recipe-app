@@ -3670,8 +3670,7 @@ body.noscroll {
 }
 .section-signin .image-container,
 .section-signin .form-container {
-  width: 50%;
-  float: left;
+
 }
 .section-signin .line-height {
   line-height: 1.4em;
