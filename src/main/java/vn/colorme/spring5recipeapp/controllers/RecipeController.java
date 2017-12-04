@@ -31,42 +31,51 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @GetMapping("/recipe/{id}/show")
+    @GetMapping("/admin/recipe/{id}/show")
     public String getRecipe(@PathVariable String id, Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        model.addAttribute("user", user);
         model.addAttribute("recipe", recipeService.getRecipeById(new Long(id)));
         return "recipe/show";
     }
 
-    @GetMapping("/recipe/new")
+    @GetMapping("/admin/recipe/new")
     public String newRecipe(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        model.addAttribute("user", user);
         model.addAttribute("recipe", new RecipeCommand());
         return "recipe/recipeform";
     }
 
-    @GetMapping("recipe/{id}/update")
+    @GetMapping("/admin/recipe/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        model.addAttribute("user", user);
         model.addAttribute("recipe", recipeService.findRecipeCommandById(new Long(id)));
         return "recipe/recipeform";
     }
 
-    @PostMapping("recipe")
-    public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand command, BindingResult bindingResult) {
-
+    @PostMapping("/admin/recipe")
+    public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand command, BindingResult bindingResult, Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        model.addAttribute("user", user);
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> {
                 log.debug(objectError.toString());
             });
             return "recipe/recipeform";
         }
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        User user = userService.findUserByEmail(auth.getName());
         command.setUserId(user.getId());
         RecipeCommand savedRecipeCommand = recipeService.saveRecipeCommand(command);
-        return "redirect:/recipe/" + savedRecipeCommand.getId() + "/show";
+        return "redirect:/admin/recipe/" + savedRecipeCommand.getId() + "/show";
     }
 
-    @GetMapping("recipe/{id}/delete")
+    @GetMapping("/admin/recipe/{id}/delete")
     public String deleteById(@PathVariable String id) {
         log.debug("Deleting id: " + id);
         recipeService.deleteById(Long.valueOf(id));
