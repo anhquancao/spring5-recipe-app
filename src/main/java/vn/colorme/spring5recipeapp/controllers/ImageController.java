@@ -1,6 +1,9 @@
 package vn.colorme.spring5recipeapp.controllers;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import vn.colorme.spring5recipeapp.commands.RecipeCommand;
+import vn.colorme.spring5recipeapp.domain.User;
 import vn.colorme.spring5recipeapp.services.ImageService;
 import vn.colorme.spring5recipeapp.services.RecipeService;
+import vn.colorme.spring5recipeapp.services.UserService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
@@ -23,15 +28,21 @@ public class ImageController {
     private ImageService imageService;
     private RecipeService recipeService;
 
+    @Autowired
+    private UserService userService;
+
     public ImageController(ImageService imageService, RecipeService recipeService) {
         this.imageService = imageService;
         this.recipeService = recipeService;
     }
 
-    @GetMapping("/recipe/{recipeId}/image")
+    @GetMapping("/admin/recipe/{recipeId}/image")
     public String showUploadForm(@PathVariable String recipeId, Model model) {
         RecipeCommand recipeCommand = recipeService.findRecipeCommandById(Long.valueOf(recipeId));
         model.addAttribute("recipe", recipeCommand);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        model.addAttribute("user", user);
         return "recipe/imageuploadform";
     }
 

@@ -1,59 +1,68 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>View Ingredient</title>
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
-          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
-
-    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+<head th:replace="admin/fragments/header :: header">
 </head>
 <body>
 <!--/*@thymesVar id="ingredient" type="vn.colorme.spring5recipeapp.commands.IngredientCommand"*/-->
-<div class="container-fluid" style="margin-top: 20px">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-primary">
+<div class="wrapper">
+    <div th:replace="admin/fragments/sidebar :: sidebar">>
 
-                <div class="panel-heading">
-                    <h1 class="panel-title">Ingredient</h1>
-                </div>
-                <div class="panel-body">
+    </div>
 
-                    <div class="table-responsive">
-                        <table class="table table-hover ">
-                            <thead class="thead-inverse">
-                            <tr>
-                                <th>ID</th>
-                                <th>Description</th>
-                            </tr>
-                            </thead>
-                            <tr th:remove="all">
-                                <td>12333</td>
-                                <td>Tasty Goodnees 2</td>
-                                <td><a href="#">View</a></td>
-                                <td><a href="#">Update</a></td>
-                                <td><a href="#">Delete</a></td>
-                            </tr>
-                            <tr>
-                                <td th:text="${ingredient.id}">334</td>
-                                <td th:text="${ingredient.amount} + ' ' + ${ingredient.unitOfMeasure.getDescription()} + ' ' + ${ingredient.description}">Tasty Goodnees 3</td>
-                            </tr>
-                        </table>
+    <div class="main-panel">
+        <nav th:replace="admin/fragments/navbar :: navbar">
+        </nav>
+        <div class="content">
+            <div class="container-fluid" style="margin-top: 20px">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    Ingredient
+                                    <a href="#"
+                                       class="btn btn-simple btn-warning btn-icon edit"
+                                       th:href="@{'/admin/recipe/' + ${ingredient.recipeId} + '/ingredient/' + ${ingredient.id} + '/update'}">
+                                        <i class="ti-pencil-alt"></i>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div class="card-content">
+
+                                <div class="table-responsive">
+                                    <table class="table table-hover ">
+                                        <thead class="thead-inverse">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        </thead>
+                                        <tr th:remove="all">
+                                            <td>12333</td>
+                                            <td>Tasty Goodnees 2</td>
+                                            <td><a href="#">View</a></td>
+                                            <td><a href="#">Update</a></td>
+                                            <td><a href="#">Delete</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${ingredient.id}">334</td>
+                                            <td th:text="${ingredient.amount} + ' ' + ${ingredient.unitOfMeasure.getDescription()} + ' ' + ${ingredient.description}">
+                                                Tasty Goodnees 3
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<footer class="footer" th:replace="admin/fragments/footer :: footer">
+</footer>
 
 </body>
 </html>

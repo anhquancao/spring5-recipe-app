@@ -66,14 +66,17 @@
                                             <td th:text="${recipe.difficulty}">Tokyo</td>
                                             <td>
                                                 <a th:href="@{'/admin/recipe/' + ${recipe.id} + '/show'}"
-                                                   class="btn btn-simple btn-info btn-icon like"><i
-                                                        class="ti-eye"></i></a>
+                                                   class="btn btn-simple btn-info btn-icon like">
+                                                    <i class="ti-eye"></i>
+                                                </a>
                                                 <a th:href="@{'/admin/recipe/' + ${recipe.id} + '/update'}"
-                                                   class="btn btn-simple btn-warning btn-icon edit"><i
-                                                        class="ti-pencil-alt"></i></a>
+                                                   class="btn btn-simple btn-warning btn-icon edit">
+                                                    <i class="ti-pencil-alt"></i>
+                                                </a>
                                                 <a th:href="@{'/admin/recipe/' + ${recipe.id} + '/delete'}"
-                                                   class="btn btn-simple btn-danger btn-icon remove"><i
-                                                        class="ti-close"></i></a>
+                                                   class="btn btn-simple btn-danger btn-icon remove">
+                                                    <i class="ti-close"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                         </tbody>

@@ -36,12 +36,12 @@
                              class="image-header">
                     </a>
                     <div class="content">
-                        <h6 class="card-date">Jul 27</h6>
+                        <h6 class="card-date" th:text="${recipe.difficulty}">Jul 27</h6>
                         <a href="#gaia" class="card-title">
                             <h3 th:text="${recipe.description}">How to Make the Perfect Statues</h3>
                         </a>
                         <div class="line-divider line-danger"></div>
-                        <h6 class="card-category">Food &amp; Drink</h6>
+                        <h6 class="card-category" th:text="'BY ' + ${recipe.user.name}">Food &amp; Drink</h6>
                     </div>
                 </div>
             </div>
@@ -157,41 +157,6 @@
                         <h6 class="card-category text-danger">Trending</h6>
                         <p class="text-description text-gray">When it comes to choosing decorative pieces, you want to
                             stick to a maximum of three colors. Then it's all about placement.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container-fluid" style="margin-top: 20px">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-primary">
-
-                <div class="panel-heading">
-                    <h1 class="panel-title">My Recipes!</h1>
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
-                        <table class="table table-hover ">
-                            <thead class="thead-inverse">
-                            <tr>
-                                <th>ID</th>
-                                <th>Description</th>
-                                <th>View</th>
-                                <th>Update</th>
-                                <th>Delete</th>
-                            </tr>
-                            </thead>
-                            <tr th:each="recipe : ${recipes}">
-                                <!--/*@thymesVar id="recipe" type="guru.springframework.domain.Recipe"*/-->
-                                <td th:text="${recipe.id}">334</td>
-                                <td th:text="${recipe.description}">Tasty Goodnees 3</td>
-                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a></td>
-                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">View</a></td>
-                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">View</a></td>
-                            </tr>
-                        </table>
                     </div>
                 </div>
             </div>

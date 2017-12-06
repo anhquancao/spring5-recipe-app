@@ -79,7 +79,7 @@ public class RecipeController {
     public String deleteById(@PathVariable String id) {
         log.debug("Deleting id: " + id);
         recipeService.deleteById(Long.valueOf(id));
-        return "redirect:/";
+        return "redirect:/admin/recipes";
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
