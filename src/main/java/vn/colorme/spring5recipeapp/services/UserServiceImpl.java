@@ -8,7 +8,6 @@ import vn.colorme.spring5recipeapp.repositories.RoleRepository;
 import vn.colorme.spring5recipeapp.repositories.UserRepository;
 
 import java.util.Arrays;
-import java.util.HashSet;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -38,7 +37,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         Role userRole = roleRepository.findByRole("ADMIN");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        user.setRoles(Arrays.asList(userRole));
         userRepository.save(user);
     }
 }

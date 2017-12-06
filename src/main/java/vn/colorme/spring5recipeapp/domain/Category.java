@@ -3,7 +3,8 @@ package vn.colorme.spring5recipeapp.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(exclude = {"recipes"})
@@ -16,6 +17,6 @@ public class Category {
     private String description;
 
     @ManyToMany(mappedBy = "categories")
-    private Set<Recipe> recipes;
+    private List<Recipe> recipes = new ArrayList<>();
 
 }

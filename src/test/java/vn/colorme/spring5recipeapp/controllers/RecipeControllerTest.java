@@ -15,6 +15,7 @@ import vn.colorme.spring5recipeapp.commands.RecipeCommand;
 import vn.colorme.spring5recipeapp.domain.Recipe;
 import vn.colorme.spring5recipeapp.domain.User;
 import vn.colorme.spring5recipeapp.exceptions.NotFoundException;
+import vn.colorme.spring5recipeapp.services.CategoryService;
 import vn.colorme.spring5recipeapp.services.RecipeService;
 import vn.colorme.spring5recipeapp.services.UserService;
 
@@ -43,10 +44,13 @@ public class RecipeControllerTest {
     @Mock
     UserService userService;
 
+    @Mock
+    CategoryService categoryService;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeController = new RecipeController(recipeService, userService);
+        recipeController = new RecipeController(recipeService, userService, categoryService);
         mockMvc = MockMvcBuilders.standaloneSetup(recipeController)
                 .setControllerAdvice(new ControllerExceptionHandler())
                 .build();

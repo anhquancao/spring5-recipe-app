@@ -9,13 +9,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import vn.colorme.spring5recipeapp.commands.CategoryCommand;
 import vn.colorme.spring5recipeapp.commands.RecipeCommand;
 import vn.colorme.spring5recipeapp.domain.User;
 import vn.colorme.spring5recipeapp.exceptions.NotFoundException;
+import vn.colorme.spring5recipeapp.services.CategoryService;
 import vn.colorme.spring5recipeapp.services.RecipeService;
 import vn.colorme.spring5recipeapp.services.UserService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -23,10 +26,15 @@ public class RecipeController {
 
     private RecipeService recipeService;
     private UserService userService;
+    private CategoryService categoryService;
 
-    public RecipeController(RecipeService recipeService, UserService userService) {
+
+    public RecipeController(RecipeService recipeService,
+                            UserService userService,
+                            CategoryService categoryService) {
         this.recipeService = recipeService;
         this.userService = userService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/admin/recipe/{id}/show")
@@ -42,7 +50,10 @@ public class RecipeController {
     public String newRecipe(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
+        List<CategoryCommand> categories = categoryService.findAllCategorieCommands();
+
         model.addAttribute("user", user);
+        model.addAttribute("categories", categories);
         model.addAttribute("recipe", new RecipeCommand());
         return "recipe/recipeform";
     }
@@ -61,6 +72,7 @@ public class RecipeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         model.addAttribute("user", user);
+
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> {
                 log.debug(objectError.toString());
