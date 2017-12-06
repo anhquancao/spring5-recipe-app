@@ -7,11 +7,16 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import vn.colorme.spring5recipeapp.commands.RecipeCommand;
+import vn.colorme.spring5recipeapp.domain.User;
 import vn.colorme.spring5recipeapp.services.ImageService;
 import vn.colorme.spring5recipeapp.services.RecipeService;
+import vn.colorme.spring5recipeapp.services.UserService;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -33,13 +38,28 @@ public class ImageControllerTest {
 
     MockMvc mockMvc;
 
+    @Mock
+    Authentication authentication;
+
+    @Mock
+    SecurityContext securityContext;
+
+    @Mock
+    UserService userService;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        imageController = new ImageController(imageService, recipeService);
+        imageController = new ImageController(imageService, recipeService, userService);
         mockMvc = MockMvcBuilders.standaloneSetup(imageController)
                 .setControllerAdvice(new ControllerExceptionHandler())
                 .build();
+
+        Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
+        SecurityContextHolder.setContext(securityContext);
+        User user = new User();
+        user.setName("admin");
+        Mockito.when(userService.findUserByEmail(any())).thenReturn(user);
     }
 
     @Test
@@ -49,7 +69,7 @@ public class ImageControllerTest {
 
         Mockito.when(recipeService.findRecipeCommandById(anyLong())).thenReturn(recipeCommand);
 
-        mockMvc.perform(get("/recipe/1/image"))
+        mockMvc.perform(get("/admin/recipe/1/image"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("recipe"));
         verify(recipeService, times(1)).findRecipeCommandById(anyLong());
@@ -62,7 +82,7 @@ public class ImageControllerTest {
 
         mockMvc.perform(multipart("/recipe/1/image").file(mockMultipartFile))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(header().string("Location", "/recipe/1/show"));
+                .andExpect(header().string("Location", "/admin/recipe/1/show"));
 
         verify(imageService, times(1)).saveImageFile(anyLong(), any());
     }

@@ -1,7 +1,6 @@
 package vn.colorme.spring5recipeapp.controllers;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -27,13 +26,12 @@ public class ImageController {
 
     private ImageService imageService;
     private RecipeService recipeService;
-
-    @Autowired
     private UserService userService;
 
-    public ImageController(ImageService imageService, RecipeService recipeService) {
+    public ImageController(ImageService imageService, RecipeService recipeService, UserService userService) {
         this.imageService = imageService;
         this.recipeService = recipeService;
+        this.userService = userService;
     }
 
     @GetMapping("/admin/recipe/{recipeId}/image")

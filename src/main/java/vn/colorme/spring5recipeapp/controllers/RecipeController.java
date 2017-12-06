@@ -1,7 +1,6 @@
 package vn.colorme.spring5recipeapp.controllers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,12 +22,11 @@ import javax.validation.Valid;
 public class RecipeController {
 
     private RecipeService recipeService;
-
-    @Autowired
     private UserService userService;
 
-    public RecipeController(RecipeService recipeService) {
+    public RecipeController(RecipeService recipeService, UserService userService) {
         this.recipeService = recipeService;
+        this.userService = userService;
     }
 
     @GetMapping("/admin/recipe/{id}/show")
