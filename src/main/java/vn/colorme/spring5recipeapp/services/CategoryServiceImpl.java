@@ -3,6 +3,7 @@ package vn.colorme.spring5recipeapp.services;
 import org.springframework.stereotype.Service;
 import vn.colorme.spring5recipeapp.commands.CategoryCommand;
 import vn.colorme.spring5recipeapp.converter.CategoryToCategoryCommand;
+import vn.colorme.spring5recipeapp.domain.Category;
 import vn.colorme.spring5recipeapp.repositories.CategoryRepository;
 
 import java.util.ArrayList;
@@ -25,4 +26,11 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.findAll().iterator().forEachRemaining(category -> list.add(categoryToCategoryCommand.convert(category)));
         return list;
     }
+
+    @Override
+    public Category findCategoryByDescription(String description) {
+        return categoryRepository.findByDescription(description).get();
+    }
+
+
 }

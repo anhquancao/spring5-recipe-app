@@ -62,6 +62,8 @@ public class RecipeController {
     public String updateRecipe(@PathVariable String id, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
+        List<CategoryCommand> categories = categoryService.findAllCategorieCommands();
+        model.addAttribute("categories", categories);
         model.addAttribute("user", user);
         model.addAttribute("recipe", recipeService.findRecipeCommandById(new Long(id)));
         return "recipe/recipeform";

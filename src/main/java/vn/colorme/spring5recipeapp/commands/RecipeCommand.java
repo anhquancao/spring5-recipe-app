@@ -51,5 +51,5 @@ public class RecipeCommand {
     private Difficulty difficulty;
     private NotesCommand notes;
     private Byte[] image;
-    private List<CategoryCommand> categories = new ArrayList<>();
+    private List<String> categorieDescriptions = new ArrayList<>();
 }

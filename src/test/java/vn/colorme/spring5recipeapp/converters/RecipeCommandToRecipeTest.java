@@ -75,8 +75,8 @@ public class RecipeCommandToRecipeTest {
         CategoryCommand category2 = new CategoryCommand();
         category2.setId(CAT_ID2);
 
-        recipeCommand.getCategories().add(category);
-        recipeCommand.getCategories().add(category2);
+        recipeCommand.getCategorieDescriptions().add(category.getDescription());
+        recipeCommand.getCategorieDescriptions().add(category2.getDescription());
 
         IngredientCommand ingredient = new IngredientCommand();
         ingredient.setId(INGRED_ID_1);

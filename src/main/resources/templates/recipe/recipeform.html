@@ -48,8 +48,8 @@
                                         <div class="col-md-9 form-group">
 
                                             <label th:each="category : ${categories}">
-                                                <input type="checkbox" th:field="*{categories}"
-                                                       th:value="${category}"/>
+                                                <input type="checkbox" th:field="*{categorieDescriptions}"
+                                                       th:value="${category.description}"/>
                                                 <span th:text="${category.description}"></span>
                                             </label>
                                         </div>

@@ -1,11 +1,14 @@
 package vn.colorme.spring5recipeapp.converter;
 
 import lombok.Synchronized;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import vn.colorme.spring5recipeapp.commands.RecipeCommand;
+import vn.colorme.spring5recipeapp.domain.Category;
 import vn.colorme.spring5recipeapp.domain.Recipe;
+import vn.colorme.spring5recipeapp.services.CategoryService;
 
 /**
  * Created by jt on 6/21/17.
@@ -16,6 +19,10 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
     private final CategoryCommandToCategory categoryConveter;
     private final IngredientCommandToIngredient ingredientConverter;
     private final NotesCommandToNotes notesConverter;
+
+    @Autowired
+    private CategoryService categoryService;
+
 
     public RecipeCommandToRecipe(CategoryCommandToCategory categoryConveter, IngredientCommandToIngredient ingredientConverter,
                                  NotesCommandToNotes notesConverter) {
@@ -45,9 +52,12 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
         recipe.setNotes(notesConverter.convert(source.getNotes()));
         recipe.setImage(source.getImage());
 
-        if (source.getCategories() != null && source.getCategories().size() > 0) {
-            source.getCategories()
-                    .forEach(category -> recipe.getCategories().add(categoryConveter.convert(category)));
+        if (source.getCategorieDescriptions() != null && source.getCategorieDescriptions().size() > 0) {
+            source.getCategorieDescriptions()
+                    .forEach(categoryDescription -> {
+                        Category category = categoryService.findCategoryByDescription(categoryDescription);
+                        recipe.getCategories().add(category);
+                    });
         }
 
         if (source.getIngredients() != null && source.getIngredients().size() > 0) {
