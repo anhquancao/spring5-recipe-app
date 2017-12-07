@@ -29,20 +29,20 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-md-4" th:each="recipe : ${recipes}">
+            <div class="col-sm-4" th:each="recipe : ${recipes}">
                 <div class="card card-blog card-plain">
-                    <a href="#gaia" class="header">
+                    <a th:href="@{'/recipe/' + ${recipe.id}}" class="header">
                         <div th:style="'width:100%;height: 200px;background-size:cover;background-position:center;background-image:url(' + @{${(recipe.image != null && recipe.image.length > 0) ? '/recipe/' + recipe.id+'/recipeimage':'/images/upload-empty.png'}} + ');'"></div>
 
-                    <a/>
-                    <div class="content">
-                        <h6 class="card-date" th:text="${recipe.difficulty}">Jul 27</h6>
-                        <a href="#gaia" class="card-title">
-                            <h3 th:text="${recipe.description}">How to Make the Perfect Statues</h3>
-                        </a>
-                        <div class="line-divider line-danger"></div>
-                        <h6 class="card-category" th:text="'BY ' + ${recipe.user.name}">Food &amp; Drink</h6>
-                    </div>
+                        <a/>
+                        <div class="content" style="height: 210px">
+                            <h6 class="card-date" th:text="${recipe.difficulty}">Jul 27</h6>
+                            <a th:href="@{'/recipe/' + ${recipe.id}}" class="card-title">
+                                <h3 th:text="${recipe.description}">How to Make the Perfect Statues</h3>
+                            </a>
+                            <div class="line-divider line-danger"></div>
+                            <h6 class="card-category" th:text="'BY ' + ${recipe.user.name}">Food &amp; Drink</h6>
+                        </div>
                 </div>
             </div>
 

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+</head>
+
+<body>
+
+<!--@thymesVar id="recipe" type="vn.colorme.spring5recipeapp.domain.Recipe"-->
+<div th:replace="fragments/navbar :: navbar">
+</div>
+
+<div class="section section-header-blog">
+    <div class="parallax filter filter-color-black">
+        <div class="image"
+             th:style="'background-size:cover;background-position:center;background-image:url(' + @{${(recipe.image != null && recipe.image.length > 0) ? '/recipe/' + recipe.id+'/recipeimage':'/images/upload-empty.png'}} + ');'"></div>
+        <div class="container">
+            <div class="content">
+                <h1 th:text="${recipe.description}">Successful Designers Share Their Routines</h1>
+                <h3 class="subtitle" th:text="${recipe.difficulty}">Find only the best stories from our famous
+                    writers.</h3>
+                <div class="separator separator-danger">✻</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="content-blog">
+
+                    <div>
+                        <h4>Information</h4>
+                        <ul class="list-group">
+
+                            <li class="list-group-item">
+                                Categories:
+                                <span th:each="cat : ${recipe.categories}"
+                                      th:text="${cat.description}"
+                                      class="label label-default">Default Label</span>
+                            </li>
+                            <li class="list-group-item">
+                                Prepare Time:
+                                <span th:text="${recipe.prepTime} + ' min'">30 min</span>
+                            </li>
+                            <li class="list-group-item">
+                                Difficulty:
+                                <span th:text="${recipe.difficulty}">Easy</span>
+                            </li>
+                            <li class="list-group-item">
+                                Cooktime:
+                                <span th:text="${recipe.cookTime}">Easy</span>
+                            </li>
+                            <li class="list-group-item">
+                                Servings:
+                                <span th:text="${recipe.servings}">Easy</span>
+                            </li>
+                            <li class="list-group-item">
+                                Source:
+                                <span th:text="${recipe.source}">Easy</span>
+                            </li>
+                            <li class="list-group-item">
+                                URL:
+                                <span th:text="${recipe.url}">Easy</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4>Ingredient</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item"
+                                th:each="ingredient : ${recipe.ingredients}">
+                                <div th:text="${ingredient.amount} + ' ' + ${ingredient.unitOfMeasure.description} +' - ' + ${ingredient.description}">
+                                    1 Cup of milk
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4>Directions</h4>
+                        <p th:text="${recipe.directions}">Lorem ipsum dolor sit amet,</p>
+                    </div>
+
+                    <div>
+                        <h4>Directions</h4>
+                        <p th:text="${recipe.notes.recipeNotes}">Lorem ipsum dolor sit amet,</p>
+                    </div>
+
+
+                </div>
+                <div class="separator separator-danger">✻</div>
+            </div>
+            <div class="col-md-3 col-md-offset-1 text-center">
+                <h3 class="social-title">Author</h3>
+                <div class="author">
+                    <div class="avatar avatar-danger">
+                        <img alt="..." src="../assets/img/faces/face_1.jpg"/>
+                    </div>
+
+                    <div class="description text-center">
+                        <h3 class="big-text" th:text="${recipe.user.name}">Tina</h3>
+                        <p class="small-text" th:text="${recipe.user.email}">Designer</p>
+                    </div>
+
+                </div>
+                <h3 class="social-title">Categories</h3>
+                <span class="label label-fill label-danger"
+                      th:each="category : ${recipe.categories}"
+                      th:text="${category.description}">
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="section">
+    <div class="container">
+        <h3>Comments</h3>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="media-area">
+                    <div class="media">
+                        <a href="#" class="avatar avatar-danger pull-left">
+                            <img class="media-object" src="../assets/img/faces/face_1.jpg">
+                        </a>
+                        <div class="media-body">
+                            <h3 class="media-heading">Tina Rosa</h3>
+                            <h5 class="text-muted pull-right">Mar 23, 09:42 AM</h5>
+                            <p>While doing this, I also came up with a name, bought the domain, found a suitable
+                                Wordpress theme I could strip to bare essentials, registered Twitter/Facebook and made a
+                                lander with an e-mail drop which I managed to get on BetaList and StartupList, two of my
+                                favorite tools to get early (possible) users.</p>
+                            <p>Don't forget, You're Awesome!</p>
+                            <div class="media-footer">
+                                <button class="btn btn-info btn-simple">
+                                    <i class="fa fa-reply"></i>
+                                    Reply
+                                </button>
+                                <button class="btn btn-danger btn-simple pull-right">
+                                    <i class="fa fa-heart"></i>
+                                    123
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="media">
+                        <a href="#" class="avatar avatar-danger pull-left">
+                            <img class="media-object" src="../assets/img/faces/face_3.jpg">
+                        </a>
+                        <div class="media-body">
+                            <h3 class="media-heading">Creative Tim</h3>
+                            <h5 class="text-muted pull-right">Mar 23, 09:42 AM</h5>
+                            <p>Hello guys, nice to have you on the platform! There will be a lot of great stuff coming
+                                soon. We will keep you posted for the latest news.</p>
+                            <p>Don't forget, You're Awesome!</p>
+                            <div class="media-footer">
+                                <button class="btn btn-info btn-simple">
+                                    <i class="fa fa-reply"></i>
+                                    Reply
+                                </button>
+                                <button class="btn btn-danger btn-simple pull-right">
+                                    <i class="fa fa-heart"></i>
+                                    243
+                                </button>
+                            </div>
+                            <div class="media media-comment">
+                                <a href="#" class="avatar avatar-danger pull-left">
+                                    <img class="media-object" src="../assets/img/faces/face_4.jpg">
+                                </a>
+                                <div class="media-body">
+                                    <h3 class="media-heading">Mike Tompson</h3>
+                                    <h5 class="text-muted pull-right">Mar 23, 09:42 AM</h5>
+                                    <p>If you’ve been around Dribbble, Behance, or any other design community lately,
+                                        you’ve probably seen the recent trend of mixing flat design with big, beautiful
+                                        diffused drop shadows. On the face of it, you might think, “That’s just a big
+                                        drop shadow applied to a rectangle,” but you’d be sorely mistaken. </p>
+                                    <div class="media-footer">
+                                        <button class="btn btn-danger btn-simple pull-right">
+                                            <i class="fa fa-heart fa-heart-o"></i>
+                                            4
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="media">
+                        <a href="#" class="avatar pull-left">
+                            <img class="media-object" src="../assets/img/faces/face_1.jpg">
+                        </a>
+                        <div class="media-body">
+                            <h3 class="media-heading">Creative Tim</h3>
+                            <h5 class="text-muted pull-right">Sep 17, 07:53 PM</h5>
+                            <p>If you’ve been around Dribbble, Behance, or any other design community lately, you’ve
+                                probably seen the recent trend of mixing flat design with big, beautiful diffused drop
+                                shadows. On the face of it, you might think, “That’s just a big drop shadow applied to a
+                                rectangle,” but you’d be sorely mistaken. </p>
+                            <p>This video will show you how to make the perfect diffused shadow for your trendiest
+                                designs.</p>
+
+                            <div class="media-footer">
+                                <button class="btn btn-info btn-simple">
+                                    <i class="fa fa-reply"></i>
+                                    Reply
+                                </button>
+                                <button class="btn btn-danger btn-simple pull-right">
+                                    <i class="fa fa-heart-o"></i>
+                                    243
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="contact-form">
+                <form action="" method="post">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <textarea name="content" class="form-control"
+                                          placeholder="Here you can write your nice text" rows="8"></textarea>
+                            </div>
+                            <button type="button" class="btn btn-danger btn-fill pull-right">Post Comment</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="section section-gray">
+    <div class="container">
+        <div class="title-area">
+            <h5 class="subtitle text-gray">Don't miss our</h5>
+            <h2>Most Recommended Recipes</h2>
+            <div class="separator separator-danger">✻</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4" th:each="recipe : ${recipes}">
+                <div class="card card-blog card-plain">
+                    <div class="card card-blog">
+                        <a th:href="@{'/recipe/' + ${recipe.id}}" class="header">
+                            <div th:style="'width:100%;height: 200px;background-size:cover;background-position:center;background-image:url(' + @{${(recipe.image != null && recipe.image.length > 0) ? '/recipe/' + recipe.id+'/recipeimage':'/images/upload-empty.png'}} + ');'"></div>
+
+                            <a/>
+                        </a>
+                        <div class="content" style="height: 210px">
+                            <h6 class="card-date" th:text="${recipe.difficulty}">Jul 27</h6>
+                            <a th:href="@{'/recipe/' + ${recipe.id}}" class="card-title">
+                                <h3 th:text="${recipe.description}">How to Make the Perfect Statues</h3>
+                            </a>
+                            <div class="line-divider line-danger"></div>
+                            <h6 class="card-category" th:text="'BY ' + ${recipe.user.name}">Food &amp; Drink</h6>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div th:replace="fragments/footer :: footer">
+    </div>
+</body>
+
+
+</html>

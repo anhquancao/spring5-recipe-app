@@ -7,6 +7,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -84,7 +85,7 @@ public class IndexControllerTest {
         Mockito.when(userService.findUserByEmail(any())).thenReturn(user);
 
         // then
-        String viewName = indexController.index(model);
+        String viewName = indexController.index(model, new PageRequest(0, 10));
         Assert.assertEquals("index", viewName);
         Mockito.verify(recipeService, Mockito.times(1)).getRecipes();
         Mockito.verify(model, Mockito.times(1)).addAttribute(Mockito.eq("recipes"), listArgumentCaptor.capture());
