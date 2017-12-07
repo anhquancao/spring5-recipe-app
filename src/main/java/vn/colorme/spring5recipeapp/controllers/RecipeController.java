@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import vn.colorme.spring5recipeapp.commands.CategoryCommand;
 import vn.colorme.spring5recipeapp.commands.RecipeCommand;
+import vn.colorme.spring5recipeapp.domain.Recipe;
 import vn.colorme.spring5recipeapp.domain.User;
 import vn.colorme.spring5recipeapp.exceptions.NotFoundException;
 import vn.colorme.spring5recipeapp.services.CategoryService;
@@ -107,6 +108,16 @@ public class RecipeController {
         modelAndView.addObject("exception", e);
 
         return modelAndView;
+    }
+
+    @GetMapping("/admin/recipes")
+    public String getRecipes(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        model.addAttribute("user", user);
+        List<Recipe> recipes = user.getRecipes();
+        model.addAttribute("recipes", recipes);
+        return "admin/recipes";
     }
 
 }

@@ -16,6 +16,10 @@
                 <!--/*@thymesVar id="recipe" type="vn.colorme.spring5recipeapp.domain.Recipe"*/-->
                 <div class="row">
                     <h4 class="title" th:text="${recipe.description}">Recipes</h4>
+                    <a th:href="@{/admin/recipe/{id}/update(id=${recipe.id})}"
+                       class="btn btn-default" style="margin-bottom: 20px">
+                        Edit
+                    </a>
                     <div class="card">
                         <div class="card-content">
                             <div class="row">

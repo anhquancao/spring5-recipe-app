@@ -8,12 +8,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import vn.colorme.spring5recipeapp.domain.Recipe;
 import vn.colorme.spring5recipeapp.domain.User;
 import vn.colorme.spring5recipeapp.services.RecipeService;
 import vn.colorme.spring5recipeapp.services.UserService;
-
-import java.util.List;
 
 @Slf4j
 @Controller
@@ -30,19 +27,12 @@ public class DashboardController {
     public String dashboard(Model model, @AuthenticationPrincipal User activeUser) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
+
         model.addAttribute("user", user);
         return "admin/index";
     }
 
-    @GetMapping("/admin/recipes")
-    public String getRecipes(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
-        model.addAttribute("user", user);
-        List<Recipe> recipes = recipeService.getRecipes();
-        model.addAttribute("recipes", recipes);
-        return "admin/recipes";
-    }
+
 
 
 }

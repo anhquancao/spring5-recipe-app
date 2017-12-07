@@ -1,5 +1,7 @@
 package vn.colorme.spring5recipeapp.services;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import vn.colorme.spring5recipeapp.commands.RecipeCommand;
 import vn.colorme.spring5recipeapp.domain.Recipe;
 
@@ -15,4 +17,6 @@ public interface RecipeService {
     RecipeCommand findRecipeCommandById(Long id);
 
     void deleteById(Long id);
+
+    Page<Recipe> listAllByPage(Pageable pageable);
 }

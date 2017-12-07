@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 import vn.colorme.spring5recipeapp.commands.RecipeCommand;
 import vn.colorme.spring5recipeapp.domain.Category;
 import vn.colorme.spring5recipeapp.domain.Recipe;
+import vn.colorme.spring5recipeapp.domain.User;
 import vn.colorme.spring5recipeapp.services.CategoryService;
+import vn.colorme.spring5recipeapp.services.UserService;
 
 /**
  * Created by jt on 6/21/17.
@@ -22,6 +24,9 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private UserService userService;
 
 
     public RecipeCommandToRecipe(CategoryCommandToCategory categoryConveter, IngredientCommandToIngredient ingredientConverter,
@@ -40,6 +45,9 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
         }
 
         final Recipe recipe = new Recipe();
+        User user = userService.findUserById(source.getUserId());
+
+        recipe.setUser(user);
         recipe.setId(source.getId());
         recipe.setCookTime(source.getCookTime());
         recipe.setPrepTime(source.getPrepTime());
