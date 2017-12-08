@@ -16,7 +16,7 @@ public class Category {
     private Long id;
     private String description;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "categories",cascade = CascadeType.ALL)
     private List<Recipe> recipes = new ArrayList<>();
 
 }

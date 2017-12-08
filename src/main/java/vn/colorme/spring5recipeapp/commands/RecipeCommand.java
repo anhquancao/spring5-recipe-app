@@ -6,10 +6,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 import vn.colorme.spring5recipeapp.domain.Difficulty;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -25,14 +22,17 @@ public class RecipeCommand {
     @Size(min = 3, max = 255)
     private String description;
 
+    @NotNull
     @Min(1)
     @Max(999)
     private Integer prepTime;
 
+    @NotNull
     @Min(1)
     @Max(999)
     private Integer cookTime;
 
+    @NotNull
     @Min(1)
     @Max(100)
     private Integer servings;
@@ -41,6 +41,7 @@ public class RecipeCommand {
 
     private Long userId;
 
+    @NotBlank
     @URL
     private String url;
 
